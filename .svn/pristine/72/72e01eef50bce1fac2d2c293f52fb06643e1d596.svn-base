@@ -1,0 +1,8 @@
+package net.beotel.services;
+
+import net.beotel.models.OutgoingCallTemplate;
+
+public interface OutgoingCallTemplateService {
+
+	OutgoingCallTemplate findById(int id);
+}

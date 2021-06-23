@@ -1,0 +1,56 @@
+package net.beotel.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import net.beotel.models.OutgoingCallTemplate;
+import net.beotel.repository.OutgoingCallTemplateRepository;
+
+public class OutgoingCallTemplateServiceImpl implements OutgoingCallService{
+	
+	private EntityManager entityManager;
+	
+	
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	@Autowired
+	OutgoingCallTemplateRepository outgoingCallTemplateRepository;
+
+	@Override
+	public List<OutgoingCallTemplate> loadAllTempaltes() {
+		
+		List<OutgoingCallTemplate> listOfTemplates = outgoingCallTemplateRepository.findAll();
+		
+		return listOfTemplates;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<String> findOutgoingCallNamesByTemplate(int id) {
+		String queryForName="SELECT DISTINCT name FROM OUTGOING_CALL oc "
+					+"where oc.OUTGOING_CALL_TEMPLATE_ID=:templateId";
+		
+		List<String> listNames=new ArrayList<>();
+		
+		Query query=getEntityManager().createNativeQuery(queryForName);
+		
+		query.setParameter("templateId", id);
+		
+		listNames=query.getResultList();
+		
+		return listNames;
+	}
+	
+}

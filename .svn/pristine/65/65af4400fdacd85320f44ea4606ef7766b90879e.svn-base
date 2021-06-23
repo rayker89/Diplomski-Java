@@ -1,0 +1,97 @@
+package net.beotel.models;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name="OUTGOING_CALL_TEMPLATE")
+public class OutgoingCallTemplate {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotBlank
+	@Size(max = 20)
+	private String name;
+	
+	@NotBlank
+	@Column(name="PREDEFINED_RESULTS")
+	private String predefinedResults;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "outgoingCallTemplate")
+	List<OutgoingCall> outgoingCalls;
+	
+	public OutgoingCallTemplate() {
+	
+	}
+	
+	
+	public OutgoingCallTemplate(Long id, String name, String predefined_results) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.predefinedResults = predefined_results;
+	}
+
+	
+
+
+	/*
+	 * public OutgoingCallTemplate(Long id, String name, String predefined_results,
+	 * List<OutgoingCall> outgoingCalls) { super(); this.id = id; this.name = name;
+	 * this.predefinedResults = predefined_results; this.outgoingCalls =
+	 * outgoingCalls; }
+	 */
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPredefinedResults() {
+		return predefinedResults;
+	}
+
+	public void setPredefinedResults(String predefined_results) {
+		this.predefinedResults = predefined_results;
+	}
+
+
+	public List<OutgoingCall> getOutgoingCalls() {
+		return outgoingCalls;
+	}
+
+
+	public void setOutgoingCalls(List<OutgoingCall> outgoingCalls) {
+		this.outgoingCalls = outgoingCalls;
+	}
+	
+	
+	
+
+}

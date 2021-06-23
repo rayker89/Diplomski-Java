@@ -1,0 +1,5 @@
+package net.beotel.services;
+
+public interface OutgoingCallTemplateService {
+
+}

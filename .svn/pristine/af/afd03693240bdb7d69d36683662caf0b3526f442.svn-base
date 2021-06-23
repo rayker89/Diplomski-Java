@@ -1,0 +1,65 @@
+package net.beotel.models;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name="OUTGOING_CALL_TEMPLATE")
+public class OutgoingCallTemplate {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@NotBlank
+	@Size(max = 20)
+	private String name;
+	
+	@NotBlank
+	private String predefined_results;
+	
+	public OutgoingCallTemplate() {
+	
+	}
+	
+	
+	public OutgoingCallTemplate(int id, String name, String predefined_results) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.predefined_results = predefined_results;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPredefined_results() {
+		return predefined_results;
+	}
+
+	public void setPredefined_results(String predefined_results) {
+		this.predefined_results = predefined_results;
+	}
+	
+	
+
+}

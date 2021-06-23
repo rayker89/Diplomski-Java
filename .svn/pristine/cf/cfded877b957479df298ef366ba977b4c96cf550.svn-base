@@ -1,0 +1,24 @@
+package net.beotel.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import net.beotel.models.OutgoingCallTemplate;
+import net.beotel.repository.OutgoingCallTemplateRepository;
+
+public class OutgoingCallTemplateServiceImpl implements OutgoingCallService{
+	
+	@Autowired
+	OutgoingCallTemplateRepository outgoingCallTemplateRepository;
+
+	@Override
+	public List<OutgoingCallTemplate> loadAllTempaltes() {
+		
+		List<OutgoingCallTemplate> listOfTemplates = outgoingCallTemplateRepository.findAll();
+		
+		return listOfTemplates;
+	}
+
+	
+}

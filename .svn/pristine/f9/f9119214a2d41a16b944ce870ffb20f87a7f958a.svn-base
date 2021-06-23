@@ -1,0 +1,52 @@
+package net.beotel.controllers;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import net.beotel.models.OutgoingCallTemplate;
+import net.beotel.repository.OutgoingCallTemplateRepository;
+
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RestController
+@RequestMapping("/api/outgoing")
+public class OutgoingCallController {
+	
+	@Autowired
+	OutgoingCallTemplateRepository outgoingCallTemplateRepository;
+	
+	
+	/*
+	 * @GetMapping("/outgoingCallTemplate")
+	 * 
+	 * @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	 * //ovu anotaciju mozemo da koristimo
+	 * zahvaljujuci @EnableGlobalMethodSecurity(prePostEnabled = true) public String
+	 * outgoingCallTemplateAccess() { // iz WebSecurity konfiguracije! return
+	 * "OutgoingCallTemplate Content."; }
+	 */
+	
+	@GetMapping("/outgoingCallTemplate")
+	//@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')") //ovu anotaciju mozemo da koristimo zahvaljujuci @EnableGlobalMethodSecurity(prePostEnabled = true) 
+	public Iterable<OutgoingCallTemplate> findTemplateList() {
+		try {	
+		Iterable<OutgoingCallTemplate> list = outgoingCallTemplateRepository.findAll();
+		return list;
+		
+		}catch (Exception e){
+			
+		}
+		return null;
+	}
+	
+	@GetMapping("/outgoingCallListImport")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')") //ovu anotaciju mozemo da koristimo zahvaljujuci @EnableGlobalMethodSecurity(prePostEnabled = true) 
+	public String outgoingCallCreateList() {												// iz WebSecurity konfiguracije!
+		return "Here should be info about existing lists and templates.";
+	}
+
+	
+}

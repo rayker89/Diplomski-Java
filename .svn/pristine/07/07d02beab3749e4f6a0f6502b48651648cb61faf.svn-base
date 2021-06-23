@@ -1,0 +1,17 @@
+package net.beotel.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import net.beotel.models.OutgoingCallTemplate;
+
+@Repository
+public interface OutgoingCallTemplateRepository extends JpaRepository<OutgoingCallTemplate, Long> {
+	
+	/*pronalazi sve templejte u bazi ako postoje*/
+	List<OutgoingCallTemplate> findAll ();
+	
+	//Optional<OutgoingCallTemplate> findByOutgoingCallTemplateId(Long id);
+}
