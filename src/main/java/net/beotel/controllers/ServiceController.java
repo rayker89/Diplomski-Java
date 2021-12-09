@@ -20,7 +20,7 @@ public class ServiceController {
 	ServiceRepository serviceRepository;
 	
 	@GetMapping("/all")
-	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+	@PreAuthorize("hasRole('SALES') or hasRole('TECHNICIAN') or hasRole('ADMIN')")
 	public Iterable<Service> findServicesList() {
 		try {
 			Iterable<Service> list = serviceRepository.findAll(Sort.by("name"));

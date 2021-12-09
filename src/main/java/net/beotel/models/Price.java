@@ -13,12 +13,21 @@ public class Price {
     @Column(name="NAME")
     private String name;
 
+    @ManyToOne (fetch=FetchType.EAGER,cascade=CascadeType.MERGE, targetEntity=Service.class)
+    @JoinColumn(name = "SERVICE_ID")
+    private Service service;
+
     @Column(name="AMOUNT")
     private Double amount;
 
-    public Price(Integer id, String name, Double amount) {
-        this.id = id;
+    public Price () {
+
+    }
+
+    public Price (String name, Service service, Double amount) {
+        super();
         this.name = name;
+        this.service = service;
         this.amount = amount;
     }
 
@@ -44,5 +53,13 @@ public class Price {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 }

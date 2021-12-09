@@ -1,5 +1,7 @@
 package net.beotel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,15 +28,13 @@ public class Package {
 	@ManyToOne (fetch=FetchType.EAGER,cascade=CascadeType.MERGE, targetEntity=Service.class)
 	@JoinColumn(name = "SERVICE_ID")
 	private Service service;
-	
-	@Column(name="TECH_PARAM_ID")
-	private int techParamId;
-	
+
 	@Column(name="STATUS")
 	private int status;
-	
-	@Column(name="PRICE_ID")
-	private int priceId;
+
+	@ManyToOne (fetch=FetchType.EAGER,cascade=CascadeType.MERGE, targetEntity=Price.class)
+	@JoinColumn(name = "PRICE_ID")
+	private Price price;
 	
 	@Column(name="DURATION_MONTHS")
 	private String durationMonths;
@@ -45,13 +45,12 @@ public class Package {
 		
 	}
 
-	public Package(String name, Service service, int techParamId, int status, int priceId, String durationMonths) {
+	public Package(String name, Service service, int status, Price price, String durationMonths) {
 		super();
 		this.name = name;
 		this.service = service;
-		this.techParamId = techParamId;
 		this.status = status;
-		this.priceId = priceId;
+		this.price = price;
 		this.durationMonths = durationMonths;
 	}
 	
@@ -86,14 +85,6 @@ public class Package {
 		this.service = service;
 	}
 
-	public int getTechParamId() {
-		return techParamId;
-	}
-
-	public void setTechParamId(int techParamId) {
-		this.techParamId = techParamId;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -102,12 +93,12 @@ public class Package {
 		this.status = status;
 	}
 
-	public int getPriceId() {
-		return priceId;
+	public Price getPrice() {
+		return price;
 	}
 
-	public void setPriceId(int priceId) {
-		this.priceId = priceId;
+	public void setPrice(Price price) {
+		this.price = price;
 	}
 
 	public String getDurationMonths() {
